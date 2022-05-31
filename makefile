@@ -5,7 +5,7 @@ mkfile_dir_path := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 build_dir_path := $(mkfile_dir_path)/$(BLD)
 current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
 
-CFLAGS=
+CFLAGS="-O0"
 
 PACKAGES=github.com/norayr/lists github.com/norayr/postgres github.com/norayr/pipes github.com/norayr/socialhome_psql
 
