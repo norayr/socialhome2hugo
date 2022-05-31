@@ -61,8 +61,8 @@ END WriteString;
 
 PROCEDURE main;
 VAR
-  authorID, postID: ARRAY 8 OF CHAR;
-  username, sposid: ARRAY 16 OF CHAR;
+  authorID: ARRAY 8 OF CHAR;
+  postID, username, sposid: ARRAY 16 OF CHAR;
   postIDnum, sposidnum: LONGINT;
   res: SHORTINT;
   postIDs, text, tags: StringList.TStringList;
