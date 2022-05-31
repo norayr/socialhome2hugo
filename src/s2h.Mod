@@ -118,7 +118,7 @@ BEGIN
         process := TRUE;
         Out.String("setting process to true"); Out.Ln;
       END;
-      IF ~process THEN
+      IF ~process OR (postIDnum = 1058335) THEN
         Out.String("skipping post id "); Out.String(postID); Out.Ln;
       ELSE
         Out.String("processing "); Out.String(postID); Out.Ln;
