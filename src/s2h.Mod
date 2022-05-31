@@ -71,7 +71,7 @@ VAR
   url: ARRAY 64 OF CHAR;
   year, month, day: ARRAY 8 OF CHAR;
   guid, tag: ARRAY 128 OF CHAR;
-  line: StringList.pstring;
+  line0, line: StringList.pstring;
   e, et : StringList.Node;
   L, Lt : StringList.TList;
   F : Files.File; R : Files.Rider;
@@ -82,13 +82,17 @@ BEGIN
   Strings.Assign("", sposid);
   parseArgs(username, sposid);
   Out.String("starting post id "); Out.String(sposid); Out.Ln;
-  IF sposid # "" THEN process := FALSE END;
-  Out.String("process is ");
-  IF process THEN Out.String("true") ELSE Out.String("else"); Out.Ln END;
   socialhomedb.getAuthorId(username, authorID);
   Out.String("got author id: "); Out.String(authorID); Out.Ln;
   postIDs := socialhomedb.getListOfPosts(authorID, TRUE);  
   Out.String("postids count "); Out.Int(postIDs.Count, 0); Out.Ln;
+  IF sposid # "" THEN
+    line0 := StringList.GetString(postIDs, 0);
+    COPY(line0^, sposid);
+    process := FALSE
+  END;
+  Out.String("process is ");
+  IF process THEN Out.String("true") ELSE Out.String("else"); Out.Ln END;
 
   NEW(e); NEW(L);
   L := postIDs;
@@ -99,12 +103,15 @@ BEGIN
     e := postIDs.Get(L, i);
     IF e # NIL THEN
       Strings.Assign(e.obj(StringList.TString).str^, postID);
-      Out.String("comparing postID "); Out.String(postID); Out.String(" with sposid ");
-      Out.String(postID); Out.String ("  "); Out.String(sposid); Out.Ln;
+      Out.String("comparing postID ["); Out.String(postID); Out.String("] with sposid [");
+      Out.String(sposid); Out.String("]"); Out.Ln;
+      res := 0;
       oocIntStr.StrToInt(postID, postIDnum, res);
-      IF res # 0 THEN Out.String("string to integer conversion failed"); HALT(1); END;
+      IF res # 0 THEN Out.String("postid string to integer conversion failed"); Out.Ln; Out.Ln; HALT(1); END;
+      res := 0;
       oocIntStr.StrToInt(sposid, sposidnum, res);
-      IF res # 0 THEN Out.String("string to integer conversion failed"); HALT(1); END;
+      Out.String("length of sposid "); Out.Int(Strings.Length(sposid), 0); Out.Ln;
+      IF res # 0 THEN Out.String("sposid string to integer conversion failed"); Out.Ln; Out.Ln; HALT(1); END;
       IF ~process & (postIDnum >= sposidnum) THEN
         process := TRUE;
         Out.String("setting process to true"); Out.Ln;
