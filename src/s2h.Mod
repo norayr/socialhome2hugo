@@ -99,7 +99,7 @@ BEGIN
     e := postIDs.Get(L, i);
     IF e # NIL THEN
       Strings.Assign(e.obj(StringList.TString).str^, postID);
-      Out.String("comparing postID with sposid: ");
+      Out.String("comparing postID "); Out.String(postID); Out.String(" with sposid ");
       Out.String(postID); Out.String ("  "); Out.String(sposid); Out.Ln;
       oocIntStr.StrToInt(postID, postIDnum, res);
       IF res # 0 THEN Out.String("string to integer conversion failed"); HALT(1); END;
