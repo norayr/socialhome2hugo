@@ -87,12 +87,14 @@ BEGIN
   postIDs := socialhomedb.getListOfPosts(authorID, TRUE);  
   Out.String("postids count "); Out.Int(postIDs.Count, 0); Out.Ln;
   IF sposid # "" THEN
+    process := FALSE
+  ELSE
     line0 := StringList.GetString(postIDs, 0);
     COPY(line0^, sposid);
-    process := FALSE
+    process := TRUE;
   END;
   Out.String("process is ");
-  IF process THEN Out.String("true") ELSE Out.String("else"); Out.Ln END;
+  IF process THEN Out.String("true") ELSE Out.String("false") END; Out.Ln;
 
   NEW(e); NEW(L);
   L := postIDs;
