@@ -68,7 +68,7 @@ VAR
   postIDs, text, tags: StringList.TStringList;
   i : LONGINT; j : INTEGER;
   time: ARRAY 32 OF CHAR;
-  url: ARRAY 64 OF CHAR;
+  url, title2: ARRAY 64 OF CHAR;
   year, month, day: ARRAY 8 OF CHAR;
   guid, tag: ARRAY 128 OF CHAR;
   line0, line: StringList.pstring;
@@ -140,6 +140,17 @@ BEGIN
         Strings.Append("/", url);
         Out.String(time); Out.Ln;
         Out.String(url); Out.Ln;
+
+        Strings.Assign(year, title2);
+        Strings.Append("-", title2);
+        Strings.Extract(time, 5, 2, month);
+        Strings.Append(month, title2);
+        Strings.Append("-", title2);
+        Strings.Extract(time, 8, 2, day);
+        Strings.Append(day, title2);
+        Strings.Append("-", title2);
+        Strings.Append(postID, title2);
+
         text := socialhomedb.getText(postID);
         (* now generating the header *)
         Strings.Assign(year, filename);
@@ -154,7 +165,8 @@ BEGIN
         IF F # NIL THEN
           Files.Set(R, F, 0);
           WriteString(R, "---"); WriteChar(R, 0AX);
-          WriteString(R, "title: "); WriteString(R, title); WriteChar(R, 0AX);
+          (*WriteString(R, "title: "); WriteString(R, title); WriteChar(R, 0AX);*)
+          WriteString(R, "title: "); WriteString(R, title2); WriteChar(R, 0AX);
           WriteString(R, "author: "); (*Files.WriteString(R, author);*) WriteString(R, author); WriteChar(R, 0AX);
           WriteString(R, "type: post");  WriteChar(R, 0AX);
           WriteString(R, "date: "); WriteString(R, time); WriteChar(R, 0AX);
