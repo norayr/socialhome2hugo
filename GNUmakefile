@@ -26,7 +26,7 @@ build_deps:
 	gmake -f $(mkfile_dir_path)/dps/postgres/GNUmakefile BUILD=$(build_dir_path)
 	gmake -f $(mkfile_dir_path)/dps/socialhome/GNUmakefile BUILD=$(build_dir_path)
 	cd $(build_dir_path) && \
-	voc -s ../src/s2h.Mod -M
+	$(VOC) -s ../src/s2h.Mod -M
 
 clean:
 	rm -rf build/*
