@@ -21,10 +21,10 @@ get_deps:
 
 build_deps:
 	mkdir -p $(build_dir_path)
-	gmake -f $(mkfile_dir_path)/dps/lists/makefile BUILD=$(build_dir_path)
-	gmake -f $(mkfile_dir_path)/dps/pipes/makefile BUILD=$(build_dir_path)
-	gmake -f $(mkfile_dir_path)/dps/postgres/makefile BUILD=$(build_dir_path)
-	gmake -f $(mkfile_dir_path)/dps/socialhome/makefile BUILD=$(build_dir_path)
+	gmake -f $(mkfile_dir_path)/dps/lists/GNUmakefile BUILD=$(build_dir_path)
+	gmake -f $(mkfile_dir_path)/dps/pipes/GNUmakefile BUILD=$(build_dir_path)
+	gmake -f $(mkfile_dir_path)/dps/postgres/GNUmakefile BUILD=$(build_dir_path)
+	gmake -f $(mkfile_dir_path)/dps/socialhome/GNUmakefile BUILD=$(build_dir_path)
 	cd $(build_dir_path) && \
 	voc -s ../src/s2h.Mod -M
 
