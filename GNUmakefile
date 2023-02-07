@@ -1,3 +1,4 @@
+VOC = /opt/voc/bin/voc
 BLD = build
 DPS = dps
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
